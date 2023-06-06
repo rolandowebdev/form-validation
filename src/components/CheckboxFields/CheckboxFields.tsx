@@ -1,13 +1,15 @@
 import { Checkbox, FormControlLabel } from '@mui/material'
-import { Control, Controller } from 'react-hook-form'
+import { Control, Controller, FieldErrors } from 'react-hook-form'
 import { FormField, User } from '../../types/user'
+import { ErrorMessage } from '..'
 
 type CheckboxProps = {
 	control: Control<User>
 	name: FormField
+	errors: FieldErrors
 }
 
-export const CheckboxFields = ({ control, name }: CheckboxProps) => {
+export const CheckboxFields = ({ control, name, errors }: CheckboxProps) => {
 	return (
 		<>
 			<Controller
@@ -20,6 +22,7 @@ export const CheckboxFields = ({ control, name }: CheckboxProps) => {
 					/>
 				)}
 			/>
+			{errors[name] ? <ErrorMessage message={errors[name]?.message} /> : null}
 		</>
 	)
 }
