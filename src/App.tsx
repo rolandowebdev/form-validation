@@ -1,3 +1,10 @@
+import { Container } from '@mui/material'
+import { Register } from './pages'
+
 export const App = () => {
-	return <div>App</div>
+	return (
+		<Container maxWidth='xs'>
+			<Register />
+		</Container>
+	)
 }
