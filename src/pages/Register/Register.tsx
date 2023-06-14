@@ -1,11 +1,12 @@
 import { Box, Avatar, Typography, InputAdornment, Button } from '@mui/material'
 import { HowToReg } from '@mui/icons-material'
 import { CheckboxFields, SelectFields, TextFields } from '../../components'
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { countries } from '../../data/countries'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { pawdRegExp, phoneRegExp } from '../../utils/validation'
+import { User } from '../../types/user'
 
 // create schema validation form
 const schema = yup.object({
@@ -48,7 +49,7 @@ export const Register = () => {
 		resolver: yupResolver(schema),
 	})
 
-	const onSubmit: SubmitHandler<FieldValues> = (data) => {
+	const onSubmit: SubmitHandler<User> = (data: User) => {
 		console.log(data)
 		reset()
 	}
