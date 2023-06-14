@@ -34,8 +34,9 @@ export const Register = () => {
 	const {
 		handleSubmit,
 		reset,
-		formState: { errors },
 		control,
+		watch,
+		formState: { errors },
 	} = useForm({
 		defaultValues: {
 			fullName: '',
@@ -53,6 +54,8 @@ export const Register = () => {
 		console.log(data)
 		reset()
 	}
+
+	console.log(`watch variable email : ${watch('email')}`)
 
 	return (
 		<Box
