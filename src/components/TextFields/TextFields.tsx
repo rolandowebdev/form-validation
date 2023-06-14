@@ -1,24 +1,20 @@
 import { FormControl, TextField, InputProps } from '@mui/material'
-import { Control, Controller, FieldErrors } from 'react-hook-form'
-import { FormField, User } from '../../types/user'
+import { Controller, useFormContext } from 'react-hook-form'
+import { FormField } from '../../types/user'
 import { addErrorIntoField } from '../../utils/errorField'
 import { ErrorMessage } from '..'
 
 type TextFieldsProps = {
 	label: string
 	inputProps?: InputProps
-	control: Control<User>
 	name: FormField
-	errors: FieldErrors
 }
 
-export const TextFields = ({
-	label,
-	inputProps,
-	control,
-	name,
-	errors,
-}: TextFieldsProps) => {
+export const TextFields = ({ label, inputProps, name }: TextFieldsProps) => {
+	const {
+		control,
+		formState: { errors },
+	} = useFormContext()
 	return (
 		<FormControl fullWidth sx={{ mb: '1rem' }}>
 			<Controller

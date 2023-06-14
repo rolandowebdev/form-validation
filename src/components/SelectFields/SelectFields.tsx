@@ -1,25 +1,21 @@
 import { FormControl, MenuItem, TextField } from '@mui/material'
-import { Control, Controller, FieldErrors } from 'react-hook-form'
-import { Country } from '../../types/country'
-import { FormField, User } from '../../types/user'
-import { addErrorIntoField } from '../../utils/errorField'
+import { Controller, useFormContext } from 'react-hook-form'
 import { ErrorMessage } from '..'
+import { Country } from '../../types/country'
+import { FormField } from '../../types/user'
+import { addErrorIntoField } from '../../utils/errorField'
 
 type SelectFieldsProps = {
 	label: string
 	countries: Country[]
-	control: Control<User>
 	name: FormField
-	errors: FieldErrors
 }
 
-export const SelectFields = ({
-	label,
-	countries,
-	control,
-	name,
-	errors,
-}: SelectFieldsProps) => {
+export const SelectFields = ({ label, countries, name }: SelectFieldsProps) => {
+	const {
+		control,
+		formState: { errors },
+	} = useFormContext()
 	return (
 		<FormControl fullWidth sx={{ mb: '1rem' }}>
 			<Controller

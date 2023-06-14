@@ -1,7 +1,7 @@
 import { Box, Avatar, Typography, InputAdornment, Button } from '@mui/material'
 import { HowToReg } from '@mui/icons-material'
 import { CheckboxFields, SelectFields, TextFields } from '../../components'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { SubmitHandler, useForm, FormProvider } from 'react-hook-form'
 import { countries } from '../../data/countries'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
@@ -35,13 +35,7 @@ const schema = yup.object().shape({
 })
 
 export const Register = () => {
-	const {
-		handleSubmit,
-		reset,
-		control,
-		watch,
-		formState: { errors },
-	} = useForm({
+	const methods = useForm({
 		defaultValues: {
 			fullName: '',
 			email: '',
@@ -56,10 +50,10 @@ export const Register = () => {
 
 	const onSubmit: SubmitHandler<User> = (data: User) => {
 		console.log(data)
-		reset()
+		methods.reset()
 	}
 
-	console.log(`watch variable email : ${watch('email')}`)
+	console.log(`watch variable email : ${methods.watch('email')}`)
 
 	return (
 		<Box
@@ -73,63 +67,37 @@ export const Register = () => {
 				<HowToReg />
 			</Avatar>
 			<Typography component='h1'>Sign Up</Typography>
-			<Box
-				noValidate
-				component='form'
-				onSubmit={handleSubmit(onSubmit)}
-				sx={{ width: '100%', mt: '1rem' }}>
-				<TextFields
-					errors={errors}
-					control={control}
-					name='fullName'
-					label='Full Name'
-				/>
-				<TextFields
-					errors={errors}
-					control={control}
-					name='email'
-					label='Email'
-				/>
-				<TextFields
-					errors={errors}
-					control={control}
-					name='mobile'
-					label='Mobile Phone'
-					inputProps={{
-						startAdornment: (
-							<InputAdornment position='start'>+91</InputAdornment>
-						),
-						type: 'number',
-					}}
-				/>
-				<SelectFields
-					errors={errors}
-					control={control}
-					name='country'
-					label='Country'
-					countries={countries}
-				/>
-				<TextFields
-					errors={errors}
-					name='password'
-					control={control}
-					label='Password'
-				/>
-				<TextFields
-					errors={errors}
-					name='confirmPassword'
-					control={control}
-					label='Confirm Password'
-				/>
-				<CheckboxFields errors={errors} name='privacy' control={control} />
-				<Button
-					type='submit'
-					fullWidth
-					variant='contained'
-					sx={{ mt: 3, mb: 2 }}>
-					Sign Up
-				</Button>
-			</Box>
+			<FormProvider {...methods}>
+				<Box
+					noValidate
+					component='form'
+					onSubmit={methods.handleSubmit(onSubmit)}
+					sx={{ width: '100%', mt: '1rem' }}>
+					<TextFields name='fullName' label='Full Name' />
+					<TextFields name='email' label='Email' />
+					<TextFields
+						name='mobile'
+						label='Mobile Phone'
+						inputProps={{
+							startAdornment: (
+								<InputAdornment position='start'>+91</InputAdornment>
+							),
+							type: 'number',
+						}}
+					/>
+					<SelectFields name='country' label='Country' countries={countries} />
+					<TextFields name='password' label='Password' />
+					<TextFields name='confirmPassword' label='Confirm Password' />
+					<CheckboxFields name='privacy' />
+					<Button
+						type='submit'
+						fullWidth
+						variant='contained'
+						sx={{ mt: 3, mb: 2 }}>
+						Sign Up
+					</Button>
+				</Box>
+			</FormProvider>
 		</Box>
 	)
 }
