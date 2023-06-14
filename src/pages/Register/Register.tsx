@@ -9,7 +9,7 @@ import { pawdRegExp, phoneRegExp } from '../../utils/validation'
 import { User } from '../../types/user'
 
 // create schema validation form
-const schema = yup.object({
+const schema = yup.object().shape({
 	fullName: yup.string().required('Full Name is required!'),
 	email: yup.string().required('Email is required!').email(),
 	country: yup.string().required('Country is required!'),
@@ -19,6 +19,8 @@ const schema = yup.object({
 		.matches(phoneRegExp, 'Phone number is not valid!'),
 	password: yup
 		.string()
+		.min(8)
+		.max(20)
 		.required('Password is required!')
 		.matches(
 			pawdRegExp,
@@ -26,6 +28,8 @@ const schema = yup.object({
 		),
 	confirmPassword: yup
 		.string()
+		.min(8)
+		.max(20)
 		.oneOf([yup.ref('password'), ''], 'Password must match'),
 	privacy: yup.bool().oneOf([true], 'Field must be checked'),
 })
