@@ -11,7 +11,11 @@ type SelectFieldsProps = {
 	name: FormField
 }
 
-export const SelectFields = ({ label, countries, name }: SelectFieldsProps) => {
+export const SelectFields: React.FC<SelectFieldsProps> = ({
+	label,
+	countries,
+	name,
+}: SelectFieldsProps) => {
 	const {
 		control,
 		formState: { errors },

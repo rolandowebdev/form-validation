@@ -6,7 +6,9 @@ type ErrorMessageProps = {
 	message: any
 }
 
-export const ErrorMessage = ({ message }: ErrorMessageProps) => {
+export const ErrorMessage: React.FC<ErrorMessageProps> = ({
+	message,
+}: ErrorMessageProps) => {
 	return (
 		<Box sx={{ display: 'flex', alignItems: 'center', gap: '5px', mt: '6px' }}>
 			<ErrorOutline color='error' fontSize='small' />

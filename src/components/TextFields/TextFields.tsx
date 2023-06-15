@@ -10,7 +10,11 @@ type TextFieldsProps = {
 	name: FormField
 }
 
-export const TextFields = ({ label, inputProps, name }: TextFieldsProps) => {
+export const TextFields: React.FC<TextFieldsProps> = ({
+	label,
+	inputProps,
+	name,
+}: TextFieldsProps) => {
 	const {
 		control,
 		formState: { errors },

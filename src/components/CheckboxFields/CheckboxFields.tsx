@@ -7,7 +7,9 @@ type CheckboxProps = {
 	name: FormField
 }
 
-export const CheckboxFields = ({ name }: CheckboxProps) => {
+export const CheckboxFields: React.FC<CheckboxProps> = ({
+	name,
+}: CheckboxProps) => {
 	const {
 		control,
 		formState: { errors },

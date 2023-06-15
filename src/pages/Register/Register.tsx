@@ -34,7 +34,7 @@ const schema = yup.object().shape({
 	privacy: yup.bool().oneOf([true], 'Field must be checked'),
 })
 
-export const Register = () => {
+export const Register: React.FC = () => {
 	const methods = useForm({
 		defaultValues: {
 			fullName: '',
